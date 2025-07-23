@@ -1,5 +1,6 @@
 "use client";
-import { Sparkles } from "lucide-react";
+import { CalendarDays, Plus, Sparkles, Shield } from "lucide-react";
+import { FeaturePill } from "@/components/ui/feature-pill";
 
 export default function Home() {
   return (
@@ -27,6 +28,21 @@ export default function Home() {
             Experience intelligent scheduling with automatic conflict detection,
             buffer time management, and seamless resource coordination.
           </p>
+
+          {/* Feature Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <FeaturePill
+              icon={Shield}
+              text="10-min Buffer Protection"
+              variant="primary"
+            />
+            <FeaturePill
+              icon={CalendarDays}
+              text="Smart Conflict Detection"
+              variant="green"
+            />
+            <FeaturePill icon={Plus} text="Real-time Updates" variant="blue" />
+          </div>
         </div>
       </div>
     </div>
