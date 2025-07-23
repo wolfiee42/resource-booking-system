@@ -1,9 +1,19 @@
 "use client";
-import { CalendarDays, Plus, Sparkles, Shield } from "lucide-react";
+import { useState } from "react";
+
 import { FeaturePill } from "@/components/ui/feature-pill";
 import BookingForm from "@/components/BookingForm";
 
+import { CalendarDays, Plus, Sparkles, Shield } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 export default function Home() {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleBookingCreated = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
+
   return (
     <div className="min-h-screen gradient-bg">
       <div className="absolute inset-0 opacity-50" />
@@ -45,8 +55,30 @@ export default function Home() {
             <FeaturePill icon={Plus} text="Real-time Updates" variant="blue" />
           </div>
         </div>
-        {/* Booking Form */}
-        <BookingForm />
+
+        <Tabs defaultValue="book" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto mb-12 bg-background/20 backdrop-blur-sm border border-border/30">
+            <TabsTrigger
+              value="book"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              <Plus className="h-4 w-4" />
+              Book Resource
+            </TabsTrigger>
+            <TabsTrigger
+              value="dashboard"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              <CalendarDays className="h-4 w-4" />
+              Dashboard
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="book" className="space-y-6">
+            {/* Booking Form */}
+            <BookingForm onBookingCreated={handleBookingCreated} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
