@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { RESOURCES, TBookingFormData } from "@/types/booking";
 
 import {
@@ -20,8 +20,18 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-import { Calendar, MapPin, Sparkles, User } from "lucide-react";
+import {
+  AlertTriangle,
+  Calendar,
+  CheckCircle,
+  Loader2,
+  MapPin,
+  Sparkles,
+  User,
+} from "lucide-react";
 import { CustomDateTimePicker } from "./custom-datetime-picker/custom-datetime-picker";
+import { Alert, AlertDescription } from "./ui/alert";
+import { Button } from "./ui/button";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState<TBookingFormData>({
@@ -30,10 +40,21 @@ export default function BookingForm() {
     startTime: "",
     endTime: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
-  const handleSubmit = async (e: React.FormEvent) => {};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setIsSubmitting(true);
+  };
 
   const handleInputChange = (field: string, value: string) => {
+    if (error) setError("");
+    if (success) setSuccess("");
+
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -144,6 +165,45 @@ export default function BookingForm() {
                 />
               </div>
             </div>
+
+            {/* Alerts */}
+            {error && (
+              <Alert
+                variant="destructive"
+                className="bg-destructive/10 border-destructive/20"
+              >
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription className="text-sm">{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {success && (
+              <Alert className="bg-primary/10 border-primary/20 text-primary">
+                <CheckCircle className="h-4 w-4" />
+                <AlertDescription className="text-sm">
+                  {success}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-green-500 hover:from-primary/90 hover:to-green-500/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                  Creating Your Booking...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-3 h-5 w-5" />
+                  Create Booking
+                </>
+              )}
+            </Button>
           </form>
         </CardContent>
       </Card>
