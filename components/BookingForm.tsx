@@ -156,11 +156,7 @@ export default function BookingForm() {
                   label="End Time"
                   value={formData.endTime}
                   onChange={(value) => handleInputChange("endTime", value)}
-                  minDate={
-                    formData.startTime
-                      ? new Date(formData.startTime)
-                      : minDateTime
-                  }
+                  minDate={minDateTime}
                   placeholder="Select end date and time"
                 />
               </div>
