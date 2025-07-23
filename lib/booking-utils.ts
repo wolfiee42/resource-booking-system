@@ -106,3 +106,16 @@ export function formatDate(isoString: string): string {
     day: "numeric",
   });
 }
+
+export function groupBookingsByResource(
+  bookings: TBooking[]
+): Record<string, TBooking[]> {
+  return bookings.reduce((groups, booking) => {
+    const resource = booking.resource;
+    if (!groups[resource]) {
+      groups[resource] = [];
+    }
+    groups[resource].push(booking);
+    return groups;
+  }, {} as Record<string, TBooking[]>);
+}
