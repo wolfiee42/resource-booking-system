@@ -1,8 +1,10 @@
-export type TBookingFormData = {
+export type TBooking = {
+  id?: string;
   resource: string;
   requestedBy: string;
   startTime: string;
   endTime: string;
+  createdAt?: string;
 };
 
 export const RESOURCES = [
@@ -13,3 +15,16 @@ export const RESOURCES = [
   "Drawing Tablet (Wacom)",
   "Meeting Pod",
 ] as const;
+
+export type BookingRequest = {
+  resource: string;
+  startTime: string;
+  endTime: string;
+  requestedBy: string;
+};
+
+export type BookingConflict = {
+  hasConflict: boolean;
+  conflictingBookings?: TBooking[];
+  message?: string;
+};

@@ -1,7 +1,7 @@
 "use client";
 
-import { ChangeEvent, useState, useEffect } from "react";
-import { RESOURCES, TBookingFormData } from "@/types/booking";
+import { ChangeEvent, useState } from "react";
+import { RESOURCES, TBooking } from "@/types/booking";
 
 import {
   Card,
@@ -34,7 +34,7 @@ import { Alert, AlertDescription } from "./ui/alert";
 import { Button } from "./ui/button";
 
 export default function BookingForm() {
-  const [formData, setFormData] = useState<TBookingFormData>({
+  const [formData, setFormData] = useState<TBooking>({
     resource: "",
     requestedBy: "",
     startTime: "",
