@@ -1,6 +1,7 @@
 "use client";
 import { CalendarDays, Plus, Sparkles, Shield } from "lucide-react";
 import { FeaturePill } from "@/components/ui/feature-pill";
+import BookingForm from "@/components/BookingForm";
 
 export default function Home() {
   return (
@@ -44,6 +45,8 @@ export default function Home() {
             <FeaturePill icon={Plus} text="Real-time Updates" variant="blue" />
           </div>
         </div>
+        {/* Booking Form */}
+        <BookingForm />
       </div>
     </div>
   );
