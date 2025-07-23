@@ -4,25 +4,22 @@ A modern web application built with Next.js and TypeScript for managing resource
 
 ## 🚀 Features
 
-- **Resource Management**: Book various resources including projectors, cameras, microphones, and meeting pods
 - **Conflict Detection**: Automatic detection of booking conflicts with 10-minute buffer zones
 - **Time Validation**:
   - Minimum booking duration: 15 minutes
   - Maximum booking duration: 2 hours
   - Future-only bookings
-- **Real-time Dashboard**: View all bookings with filtering and sorting capabilities
-- **Responsive Design**: Modern UI built with Tailwind CSS and Radix UI components
-- **Custom Date/Time Picker**: Intuitive booking interface
-- **Status Tracking**: Automatic status updates (upcoming, ongoing, past)
+- **Real-time Dashboard**: View all bookings with filtering capabilities
+- **Responsive Design**: Modern UI built with Tailwind CSS and ShadCN
 
 ## 🛠 Tech Stack
 
 - **Framework**: Next.js 15.4.2
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **UI Components**: Radix UI
+- **UI Components**: ShadCN
 - **Icons**: Lucide React
-- **Date Handling**: date-fns, react-day-picker
+- **Date Handling**: date-fns
 - **Package Manager**: pnpm
 
 ## 📁 Project Structure
@@ -34,7 +31,7 @@ resource-booking-system-next/
 │   │   └── bookings/           # Booking API endpoints
 │   │       ├── route.ts        # Main bookings API (GET, POST)
 │   │       └── [id]/
-│   │           └── route.ts    # Individual booking API (PUT, DELETE)
+│   │           └── route.ts    # Individual booking API (DELETE)
 │   ├── favicon.ico
 │   ├── globals.css             # Global styles
 │   ├── layout.tsx              # Root layout component
@@ -85,13 +82,6 @@ resource-booking-system-next/
 ├── types/                       # TypeScript type definitions
 │   └── booking.ts               # Booking-related types
 │
-├── public/                      # Static assets
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── next.svg
-│   ├── vercel.svg
-│   └── window.svg
-│
 ├── components.json              # Shadcn/ui configuration
 ├── eslint.config.mjs           # ESLint configuration
 ├── next.config.ts              # Next.js configuration
@@ -116,7 +106,7 @@ resource-booking-system-next/
 
    ```bash
    git clone <repository-url>
-   cd resource-booking-system-next
+   cd resource-booking-system
    ```
 
 2. **Install dependencies**
@@ -141,32 +131,6 @@ resource-booking-system-next/
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 
-## 📋 Available Resources
-
-The system supports booking the following resources:
-
-- **4K Projector & Screen** - High-resolution presentation equipment
-- **DSLR Camera Kit** - Professional photography equipment
-- **Portable Microphone Set** - Audio recording equipment
-- **Whiteboard & Markers Set** - Meeting and presentation tools
-- **Drawing Tablet (Wacom)** - Digital design equipment
-- **Meeting Pod** - Private meeting space
-
-## 🔧 Key Components
-
-### Booking System
-
-- **Conflict Detection**: Prevents double-booking with intelligent overlap detection
-- **Buffer Time**: 10-minute buffer zones between bookings
-- **Validation**: Comprehensive time and duration validation
-- **Status Tracking**: Automatic status updates based on current time
-
-### UI Components
-
-- **Custom DateTime Picker**: User-friendly date and time selection
-- **Dashboard**: Real-time view of all bookings with filtering
-- **Responsive Design**: Works seamlessly on desktop and mobile
-- **Accessibility**: Built with Radix UI for excellent accessibility support
 
 ### Data Management
 
@@ -178,44 +142,7 @@ The system supports booking the following resources:
 
 - `GET /api/bookings` - Retrieve all bookings
 - `POST /api/bookings` - Create a new booking
-- `PUT /api/bookings/[id]` - Update an existing booking
 - `DELETE /api/bookings/[id]` - Delete a booking
-
-## 🎨 Styling
-
-The project uses a modern design system with:
-
-- **Tailwind CSS** for utility-first styling
-- **CSS Custom Properties** for theming
-- **Gradient Backgrounds** for visual appeal
-- **Consistent Spacing** and typography
-- **Dark/Light Mode** support through CSS variables
-
-## 🚦 Validation Rules
-
-- **Start Time**: Must be in the future
-- **End Time**: Must be after start time
-- **Duration**: Minimum 15 minutes, maximum 2 hours
-- **Conflicts**: Automatic detection with 10-minute buffer zones
-- **Required Fields**: All booking fields are mandatory
-
-## 🔮 Future Enhancements
-
-- User authentication and authorization
-- Email notifications for bookings
-- Recurring bookings
-- Resource availability calendar
-- Booking history and analytics
-- Database integration (PostgreSQL/MongoDB)
-- Real-time updates with WebSockets
-
-## 📝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## 📄 License
 
