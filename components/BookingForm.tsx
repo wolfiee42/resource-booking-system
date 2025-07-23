@@ -1,14 +1,45 @@
 "use client";
 
+import { useState } from "react";
+import { RESOURCES, TBookingFormData } from "@/types/booking";
+
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { MapPin, Sparkles } from "lucide-react";
 
 export default function BookingForm() {
+  const [formData, setFormData] = useState<TBookingFormData>({
+    resource: "",
+    requestedBy: "",
+    startTime: "",
+    endTime: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {};
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  console.log(formData);
+
   return (
     <div className="w-full max-w-4xl mx-auto">
       <Card className="card-gradient shadow-2xl">
@@ -26,6 +57,44 @@ export default function BookingForm() {
             10-minute buffer protection
           </CardDescription>
         </CardHeader>
+
+        <CardContent className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Resource and User Info */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-3">
+                <Label
+                  htmlFor="resource"
+                  className="flex items-center gap-2 text-base font-medium"
+                >
+                  <MapPin className="h-5 w-5 text-primary" />
+                  Resource
+                </Label>
+                <Select
+                  value={formData.resource}
+                  onValueChange={(value) =>
+                    handleInputChange("resource", value)
+                  }
+                >
+                  <SelectTrigger className="h-12 bg-background/50 border-border/50 hover:bg-background/80 transition-colors">
+                    <SelectValue placeholder="Choose your resource" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-card/95 backdrop-blur-sm border-border/50">
+                    {RESOURCES.map((resource) => (
+                      <SelectItem
+                        key={resource}
+                        value={resource}
+                        className="hover:bg-primary/10"
+                      >
+                        {resource}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </form>
+        </CardContent>
       </Card>
     </div>
   );
