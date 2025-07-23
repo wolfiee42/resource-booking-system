@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { CustomDateTimePickerViewProps } from "./types";
 import { useDateTimePicker } from "@/components/custom-datetime-picker/context";
 
@@ -23,7 +24,13 @@ import { CalendarIcon, Clock } from "lucide-react";
 export function CustomDateTimePickerView({
   label,
   minDate = new Date(),
-}: CustomDateTimePickerViewProps) {
+}: Readonly<CustomDateTimePickerViewProps>) {
+  // Normalize minDate to start of day to allow selection of current date
+  const normalizedMinDate = useMemo(() => {
+    const date = new Date(minDate);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }, [minDate]);
   const {
     selectedDate,
     selectedHour,
@@ -88,7 +95,7 @@ export function CustomDateTimePickerView({
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
-                  disabled={(date) => date < minDate}
+                  disabled={(date) => date < normalizedMinDate}
                   className="rounded-md border-0"
                 />
               </div>

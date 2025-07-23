@@ -24,6 +24,10 @@ export function validateBookingTimes(
     return "Booking duration must be at least 15 minutes";
   }
 
+  if (durationMinutes > 120) {
+    return "Booking duration cannot exceed 2 hours";
+  }
+
   return null;
 }
 

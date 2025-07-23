@@ -37,7 +37,9 @@ interface BookingFormProps {
   onBookingCreated: () => void;
 }
 
-export default function BookingForm({ onBookingCreated }: BookingFormProps) {
+export default function BookingForm({
+  onBookingCreated,
+}: Readonly<BookingFormProps>) {
   const [formData, setFormData] = useState<TBooking>({
     resource: "",
     requestedBy: "",
@@ -97,7 +99,7 @@ export default function BookingForm({ onBookingCreated }: BookingFormProps) {
   };
 
   const minDateTime = new Date();
-  console.log(formData);
+  minDateTime.setHours(0, 0, 0, 0); // Set to beginning of today
 
   return (
     <div className="w-full max-w-4xl mx-auto">
