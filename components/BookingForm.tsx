@@ -20,7 +20,8 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-import { MapPin, Sparkles, User } from "lucide-react";
+import { Calendar, MapPin, Sparkles, User } from "lucide-react";
+import { CustomDateTimePicker } from "./custom-datetime-picker/custom-datetime-picker";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState<TBookingFormData>({
@@ -39,6 +40,7 @@ export default function BookingForm() {
     }));
   };
 
+  const minDateTime = new Date();
   console.log(formData);
 
   return (
@@ -111,6 +113,34 @@ export default function BookingForm() {
                   }
                   className="h-12 bg-background/50 border-border/50 hover:bg-background/80 transition-colors"
                   required
+                />
+              </div>
+            </div>
+
+            {/* Date and Time Selection */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Calendar className="h-5 w-5 text-primary" />
+                <h3 className="text-lg font-semibold">Schedule Details</h3>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                <CustomDateTimePicker
+                  label="Start Time"
+                  placeholder="Select start date and time"
+                  value={formData.startTime}
+                  onChange={(value) => handleInputChange("startTime", value)}
+                  minDate={minDateTime}
+                />
+                <CustomDateTimePicker
+                  label="End Time"
+                  value={formData.endTime}
+                  onChange={(value) => handleInputChange("endTime", value)}
+                  minDate={
+                    formData.startTime
+                      ? new Date(formData.startTime)
+                      : minDateTime
+                  }
+                  placeholder="Select end date and time"
                 />
               </div>
             </div>
