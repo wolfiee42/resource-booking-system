@@ -33,7 +33,11 @@ import { CustomDateTimePicker } from "./custom-datetime-picker/custom-datetime-p
 import { Alert, AlertDescription } from "./ui/alert";
 import { Button } from "./ui/button";
 
-export default function BookingForm() {
+interface BookingFormProps {
+  onBookingCreated: () => void;
+}
+
+export default function BookingForm({ onBookingCreated }: BookingFormProps) {
   const [formData, setFormData] = useState<TBooking>({
     resource: "",
     requestedBy: "",
@@ -46,9 +50,40 @@ export default function BookingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     setError("");
     setSuccess("");
-    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || data.error || "Failed to create booking"
+        );
+      }
+
+      setSuccess("Booking created successfully!");
+      setFormData({
+        resource: "",
+        startTime: "",
+        endTime: "",
+        requestedBy: "",
+      });
+      onBookingCreated();
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
