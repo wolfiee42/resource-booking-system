@@ -1,4 +1,4 @@
-import { BookingConflict, TBooking } from "@/types/booking";
+import { BookingConflict, BookingStatus, TBooking } from "@/types/booking";
 import { bookingStore } from "./booking-store";
 
 const BUFFER_MINUTES = 10;
@@ -73,6 +73,19 @@ export function checkBookingConflicts(
   }
 
   return { hasConflict: false };
+}
+
+export function getBookingStatus(
+  startTime: string,
+  endTime: string
+): BookingStatus {
+  const now = new Date();
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+
+  if (now < start) return "upcoming";
+  if (now > end) return "past";
+  return "ongoing";
 }
 
 export function formatTime(isoString: string): string {

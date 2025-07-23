@@ -6,6 +6,35 @@ import {
   validateBookingTimes,
 } from "@/lib/booking-utils";
 
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const resource = searchParams.get("resource");
+    const date = searchParams.get("date");
+
+    let bookings = bookingStore.getAll();
+
+    if (resource) {
+      bookings = bookings.filter((booking) => booking.resource === resource);
+    }
+
+    if (date) {
+      const targetDate = new Date(date).toDateString();
+      bookings = bookings.filter(
+        (booking) => new Date(booking.startTime).toDateString() === targetDate
+      );
+    }
+
+    return NextResponse.json({ bookings });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch bookings" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body: BookingRequest = await request.json();

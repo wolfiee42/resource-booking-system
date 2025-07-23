@@ -28,3 +28,5 @@ export type BookingConflict = {
   conflictingBookings?: TBooking[];
   message?: string;
 };
+
+export type BookingStatus = "upcoming" | "ongoing" | "past";

@@ -6,6 +6,7 @@ import BookingForm from "@/components/BookingForm";
 
 import { CalendarDays, Plus, Sparkles, Shield } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BookingDashboard } from "@/components/BookingDashboard";
 
 export default function Home() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -75,8 +76,11 @@ export default function Home() {
           </TabsList>
 
           <TabsContent value="book" className="space-y-6">
-            {/* Booking Form */}
             <BookingForm onBookingCreated={handleBookingCreated} />
+          </TabsContent>
+
+          <TabsContent value="dashboard" className="space-y-6">
+            <BookingDashboard refreshTrigger={refreshTrigger} />
           </TabsContent>
         </Tabs>
       </div>
