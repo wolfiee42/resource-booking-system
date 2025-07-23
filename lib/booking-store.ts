@@ -5,16 +5,16 @@ let bookings: TBooking[] = [
   {
     id: "1",
     resource: "DSLR Camera Kit",
-    startTime: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(), // 2 hours from now
-    endTime: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(), // 3 hours from now
+    startTime: new Date("2025-07-23T14:00:00").toISOString(),
+    endTime: new Date("2025-07-23T15:00:00").toISOString(),
     requestedBy: "Jhankar Mahbub",
     createdAt: new Date().toISOString(),
   },
   {
     id: "2",
     resource: "Meeting Pod",
-    startTime: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(), // 4 hours from now
-    endTime: new Date(Date.now() + 5 * 60 * 60 * 1000).toISOString(), // 5 hours from now
+    startTime: new Date("2025-07-24T10:00:00").toISOString(),
+    endTime: new Date("2025-07-24T11:00:00").toISOString(),
     requestedBy: "HM Nayem",
     createdAt: new Date().toISOString(),
   },

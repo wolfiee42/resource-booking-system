@@ -83,6 +83,17 @@ export default function Home() {
             <BookingDashboard refreshTrigger={refreshTrigger} />
           </TabsContent>
         </Tabs>
+
+        {/* Footer Info */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background/10 backdrop-blur-sm border border-border/20">
+            <Shield className="h-5 w-5 text-primary" />
+            <span className="text-sm text-muted-foreground">
+              <strong className="text-primary">Buffer Logic:</strong> 10-minute
+              buffer time automatically prevents scheduling conflicts
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
