@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { RESOURCES, TBookingFormData } from "@/types/booking";
 
 import {
@@ -18,8 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
-import { MapPin, Sparkles } from "lucide-react";
+import { MapPin, Sparkles, User } from "lucide-react";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState<TBookingFormData>({
@@ -79,7 +80,7 @@ export default function BookingForm() {
                   <SelectTrigger className="h-12 bg-background/50 border-border/50 hover:bg-background/80 transition-colors">
                     <SelectValue placeholder="Choose your resource" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card/95 backdrop-blur-sm border-border/50">
+                  <SelectContent className="bg-card/95 border-border/50">
                     {RESOURCES.map((resource) => (
                       <SelectItem
                         key={resource}
@@ -91,6 +92,26 @@ export default function BookingForm() {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+              <div className="space-y-3">
+                <Label
+                  htmlFor="requestedBy"
+                  className="flex items-center gap-2 text-base font-medium"
+                >
+                  <User className="h-5 w-5 text-primary" />
+                  Requested By
+                </Label>
+                <Input
+                  id="requestedBy"
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={formData.requestedBy}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange("requestedBy", e.target.value)
+                  }
+                  className="h-12 bg-background/50 border-border/50 hover:bg-background/80 transition-colors"
+                  required
+                />
               </div>
             </div>
           </form>
