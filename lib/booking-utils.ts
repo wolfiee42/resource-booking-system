@@ -119,3 +119,9 @@ export function groupBookingsByResource(
     return groups;
   }, {} as Record<string, TBooking[]>);
 }
+
+export function sortBookingsByTime(bookings: TBooking[]): TBooking[] {
+  return [...bookings].sort(
+    (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
+  );
+}
